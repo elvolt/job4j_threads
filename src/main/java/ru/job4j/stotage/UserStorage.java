@@ -18,12 +18,12 @@ public class UserStorage implements Storage {
 
     @Override
     public synchronized boolean update(User user) {
-        return storage.replace(user.getId(), user) == null;
+        return storage.replace(user.getId(), user) != null;
     }
 
     @Override
     public synchronized boolean delete(User user) {
-        return storage.remove(user.getId()) == null;
+        return storage.remove(user.getId(), user);
     }
 
     @Override
