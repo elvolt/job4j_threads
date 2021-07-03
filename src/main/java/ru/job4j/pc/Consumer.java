@@ -12,7 +12,11 @@ public class Consumer implements Runnable {
     @Override
     public void run() {
         for (int i = 0; i < count; i++) {
-            queue.poll();
+            try {
+                queue.poll();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
