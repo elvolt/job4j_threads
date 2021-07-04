@@ -1,17 +1,14 @@
 package ru.job4j.pc;
 
 public class ParallelSearch {
-
     public static void main(String[] args) throws InterruptedException {
         SimpleBlockingQueue<Integer> queue = new SimpleBlockingQueue<>(3);
         final Thread consumer = new Thread(
                 () -> {
-                    boolean run = true;
-                    while (run) {
+                    while (!Thread.currentThread().isInterrupted()) {
                         try {
                             System.out.println(queue.poll());
                         } catch (InterruptedException e) {
-                            run = false;
                             Thread.currentThread().interrupt();
                         }
                     }
